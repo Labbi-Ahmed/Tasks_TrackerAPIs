@@ -27,6 +27,9 @@ public class RegistrationController {
         if(userService.findUserByEmail(userDAO.getEmail()) != null)
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email Address already used");
 
+        if(!userDAO.getPassword().equals(userDAO.getConfirmPassword()))
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password must ne matched with confirm password");
+
         userService.createNewUser(userDAO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Successfully Register user");
@@ -36,22 +39,12 @@ public class RegistrationController {
     public ResponseEntity<String> loginUser(@Valid @RequestBody UserLoginDAO dao){
 
         User user = userService.getLoginUser(dao);
+        if(user == null)
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email or password invalid");
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(user != null ? "Successfully Login": "Email or password invalid");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully Login");
     }
 
-    @PutMapping("/profile-edit/{email}")
-    public ResponseEntity<UserDTO> userProfileEdit(
-            @Valid @RequestBody UpdateUserDAO dao,
-            @PathVariable("email") @Email String email) {
-
-        if (userService.findUserByEmail(email) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        UserDTO updatedUser = userService.userProfileEdit(dao, email);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
-    }
 
 
 
