@@ -1,7 +1,5 @@
 package com.labbi.TaskTracker.model;
 
-import com.labbi.TaskTracker.dao.UserDAO;
-import com.labbi.TaskTracker.utility.InternalService;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
-import java.util.Base64;
 import java.util.Set;
 
 

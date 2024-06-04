@@ -1,4 +1,4 @@
-package com.labbi.TaskTracker.dao;
+package com.labbi.TaskTracker.model.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

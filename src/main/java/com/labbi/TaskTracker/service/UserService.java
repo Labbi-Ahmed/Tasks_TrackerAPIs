@@ -1,17 +1,17 @@
 package com.labbi.TaskTracker.service;
 
 import com.labbi.TaskTracker.common.ObjectMapper;
-import com.labbi.TaskTracker.dao.UpdateUserDAO;
-import com.labbi.TaskTracker.dao.UpdateUserPasswordDAO;
-import com.labbi.TaskTracker.dao.UserDAO;
-import com.labbi.TaskTracker.dao.UserLoginDAO;
-import com.labbi.TaskTracker.dto.UserDTO;
+import com.labbi.TaskTracker.model.dao.UpdateUserDAO;
+import com.labbi.TaskTracker.model.dao.UpdateUserPasswordDAO;
+import com.labbi.TaskTracker.model.dao.UserDAO;
+import com.labbi.TaskTracker.model.dao.UserLoginDAO;
+import com.labbi.TaskTracker.model.dto.UserDTO;
 import com.labbi.TaskTracker.model.Role;
 import com.labbi.TaskTracker.model.User;
 import com.labbi.TaskTracker.repogitory.RoleRepository;
 import com.labbi.TaskTracker.repogitory.UserRepogitory;
-import com.labbi.TaskTracker.utility.InternalService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -25,13 +25,19 @@ public class UserService {
 
     private final RoleRepository roleRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public User findUserByEmail(String email) {
         return repogitory.findByEmail(email);
     }
 
     public User createNewUser(UserDAO dao) {
 
+        dao.setPassword(passwordEncoder.encode(dao.getPassword()));
+
         User user = ObjectMapper.createUserMapper(dao);
+
+
 
         Role defaultRole = roleRepository.findByName("USER");
         Set<Role> roles = new HashSet<>();
@@ -46,7 +52,7 @@ public class UserService {
 
     public User getLoginUser(UserLoginDAO dao) {
 
-        String password = InternalService.encodePassword(dao.getPassword());
+        String password = passwordEncoder.encode(dao.getPassword());
         return repogitory.findByEmailAndPassword(dao.getEmail(), password);
     }
 
@@ -64,15 +70,14 @@ public class UserService {
 
     public String changePassword(UpdateUserPasswordDAO dao, String email) {
 
-        String password = InternalService.encodePassword(dao.getOldPassword());
+        if(!dao.getNewPassword().equals(dao.getNewConfirmPassword())) return "Password not matched";
 
-        User user = repogitory.findByEmailAndPassword(email,password);
+        User user = repogitory.findByEmail(email);
 
         if(user == null) return "Invalid email or current password";
 
-        if(!dao.getNewPassword().equals(dao.getNewConfirmPassword())) return "Password not matched";
-
-        user.setPassword(InternalService.encodePassword(dao.getNewConfirmPassword()));
+        if(!passwordEncoder.matches(dao.getOldPassword(), user.getPassword())) return "Password Invalid";
+        user.setPassword(passwordEncoder.encode(dao.getNewConfirmPassword()));
 
         repogitory.save(user);
 

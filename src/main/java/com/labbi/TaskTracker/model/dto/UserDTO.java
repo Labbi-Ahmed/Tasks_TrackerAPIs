@@ -1,4 +1,4 @@
-package com.labbi.TaskTracker.dto;
+package com.labbi.TaskTracker.model.dto;
 
 import com.labbi.TaskTracker.model.User;
 import lombok.AllArgsConstructor;

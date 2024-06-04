@@ -1,18 +1,21 @@
 package com.labbi.TaskTracker.controller;
 
-import com.labbi.TaskTracker.customException.EmailAlreadyExistException;
-import com.labbi.TaskTracker.customException.EmailNotRegister;
-import com.labbi.TaskTracker.dao.UpdateUserDAO;
-import com.labbi.TaskTracker.dao.UserDAO;
-import com.labbi.TaskTracker.dao.UserLoginDAO;
-import com.labbi.TaskTracker.dto.UserDTO;
+import com.labbi.TaskTracker.model.dao.UserDAO;
+import com.labbi.TaskTracker.model.dao.UserLoginDAO;
 import com.labbi.TaskTracker.model.User;
 import com.labbi.TaskTracker.service.UserService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 public class RegistrationController {
 
     private final UserService userService;
+
+    private final AuthenticationManager authenticationManager;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<String> registerNewUser(@Valid @RequestBody UserDAO userDAO){
@@ -38,11 +43,19 @@ public class RegistrationController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<String> loginUser(@Valid @RequestBody UserLoginDAO dao){
 
-        User user = userService.getLoginUser(dao);
-        if(user == null)
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email or password invalid");
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully Login");
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(dao.getEmail(),dao.getPassword())
+        );
+
+
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully Login!");
+
+
     }
 
 
