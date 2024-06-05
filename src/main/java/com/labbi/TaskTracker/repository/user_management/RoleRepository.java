@@ -1,4 +1,4 @@
-package com.labbi.TaskTracker.repogitory.user_management;
+package com.labbi.TaskTracker.repository.user_management;
 
 import com.labbi.TaskTracker.model.user_management.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

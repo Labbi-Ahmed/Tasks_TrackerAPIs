@@ -1,6 +1,6 @@
 package com.labbi.TaskTracker.model.user_management;
 
-import com.labbi.TaskTracker.repogitory.user_management.UserRepogitory;
+import com.labbi.TaskTracker.repository.user_management.UserRepogitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

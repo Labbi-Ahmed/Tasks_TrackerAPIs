@@ -2,7 +2,7 @@ package com.labbi.TaskTracker.extra;
 
 
 import com.labbi.TaskTracker.model.user_management.Role;
-import com.labbi.TaskTracker.repogitory.user_management.RoleRepository;
+import com.labbi.TaskTracker.repository.user_management.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
