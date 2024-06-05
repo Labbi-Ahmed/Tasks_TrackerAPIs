@@ -1,6 +1,6 @@
-package com.labbi.TaskTracker.repogitory;
+package com.labbi.TaskTracker.repogitory.user_management;
 
-import com.labbi.TaskTracker.model.User;
+import com.labbi.TaskTracker.model.user_management.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepogitory extends JpaRepository<User, Long> {

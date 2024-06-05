@@ -1,21 +1,17 @@
-package com.labbi.TaskTracker.controller;
+package com.labbi.TaskTracker.controller.user_management;
 
-import com.labbi.TaskTracker.model.dao.UserDAO;
-import com.labbi.TaskTracker.model.dao.UserLoginDAO;
-import com.labbi.TaskTracker.model.User;
-import com.labbi.TaskTracker.service.UserService;
+import com.labbi.TaskTracker.model.user_management.dao.UserDAO;
+import com.labbi.TaskTracker.model.user_management.dao.UserLoginDAO;
+import com.labbi.TaskTracker.service.user_management.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

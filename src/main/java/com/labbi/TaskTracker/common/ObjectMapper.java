@@ -1,8 +1,8 @@
 package com.labbi.TaskTracker.common;
 
-import com.labbi.TaskTracker.model.dao.UpdateUserDAO;
-import com.labbi.TaskTracker.model.dao.UserDAO;
-import com.labbi.TaskTracker.model.User;
+import com.labbi.TaskTracker.model.user_management.dao.UpdateUserDAO;
+import com.labbi.TaskTracker.model.user_management.dao.UserDAO;
+import com.labbi.TaskTracker.model.user_management.User;
 
 import java.time.Instant;
 

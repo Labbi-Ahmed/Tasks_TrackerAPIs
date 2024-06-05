@@ -1,4 +1,4 @@
-package com.labbi.TaskTracker.model.dao;
+package com.labbi.TaskTracker.model.user_management.dao;
 
 
 import jakarta.validation.constraints.Size;
