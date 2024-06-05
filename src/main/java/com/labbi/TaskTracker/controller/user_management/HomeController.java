@@ -1,4 +1,4 @@
-package com.labbi.TaskTracker.controller;
+package com.labbi.TaskTracker.controller.user_management;
 
 
 import lombok.RequiredArgsConstructor;

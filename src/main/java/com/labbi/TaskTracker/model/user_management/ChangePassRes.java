@@ -1,10 +1,9 @@
-package com.labbi.TaskTracker.model;
+package com.labbi.TaskTracker.model.user_management;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Data

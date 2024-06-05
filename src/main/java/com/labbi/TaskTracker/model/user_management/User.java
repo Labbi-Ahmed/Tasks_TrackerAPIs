@@ -1,4 +1,4 @@
-package com.labbi.TaskTracker.model;
+package com.labbi.TaskTracker.model.user_management;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

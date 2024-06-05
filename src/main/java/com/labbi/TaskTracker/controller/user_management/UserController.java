@@ -1,10 +1,10 @@
-package com.labbi.TaskTracker.controller;
+package com.labbi.TaskTracker.controller.user_management;
 
-import com.labbi.TaskTracker.model.ChangePassRes;
-import com.labbi.TaskTracker.model.dao.UpdateUserDAO;
-import com.labbi.TaskTracker.model.dao.UpdateUserPasswordDAO;
-import com.labbi.TaskTracker.model.dto.UserDTO;
-import com.labbi.TaskTracker.service.UserService;
+import com.labbi.TaskTracker.model.user_management.ChangePassRes;
+import com.labbi.TaskTracker.model.user_management.dao.UpdateUserDAO;
+import com.labbi.TaskTracker.model.user_management.dao.UpdateUserPasswordDAO;
+import com.labbi.TaskTracker.model.user_management.dto.UserDTO;
+import com.labbi.TaskTracker.service.user_management.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;

@@ -1,16 +1,16 @@
-package com.labbi.TaskTracker.service;
+package com.labbi.TaskTracker.service.user_management;
 
 import com.labbi.TaskTracker.common.ObjectMapper;
-import com.labbi.TaskTracker.model.ChangePassRes;
-import com.labbi.TaskTracker.model.dao.UpdateUserDAO;
-import com.labbi.TaskTracker.model.dao.UpdateUserPasswordDAO;
-import com.labbi.TaskTracker.model.dao.UserDAO;
-import com.labbi.TaskTracker.model.dao.UserLoginDAO;
-import com.labbi.TaskTracker.model.dto.UserDTO;
-import com.labbi.TaskTracker.model.Role;
-import com.labbi.TaskTracker.model.User;
-import com.labbi.TaskTracker.repogitory.RoleRepository;
-import com.labbi.TaskTracker.repogitory.UserRepogitory;
+import com.labbi.TaskTracker.model.user_management.ChangePassRes;
+import com.labbi.TaskTracker.model.user_management.dao.UpdateUserDAO;
+import com.labbi.TaskTracker.model.user_management.dao.UpdateUserPasswordDAO;
+import com.labbi.TaskTracker.model.user_management.dao.UserDAO;
+import com.labbi.TaskTracker.model.user_management.dao.UserLoginDAO;
+import com.labbi.TaskTracker.model.user_management.dto.UserDTO;
+import com.labbi.TaskTracker.model.user_management.Role;
+import com.labbi.TaskTracker.model.user_management.User;
+import com.labbi.TaskTracker.repogitory.user_management.RoleRepository;
+import com.labbi.TaskTracker.repogitory.user_management.UserRepogitory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
