@@ -1,5 +1,6 @@
 package com.labbi.TaskTracker.controller;
 
+import com.labbi.TaskTracker.model.ChangePassRes;
 import com.labbi.TaskTracker.model.dao.UpdateUserDAO;
 import com.labbi.TaskTracker.model.dao.UpdateUserPasswordDAO;
 import com.labbi.TaskTracker.model.dto.UserDTO;
@@ -40,7 +41,8 @@ public class UserController {
             @Valid @RequestBody UpdateUserPasswordDAO dao,
             @PathVariable("email") @Email String email) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(userService.changePassword(dao,email));
+        ChangePassRes res = userService.changePassword(dao, email);
+        return ResponseEntity.status(res.getStatus()).body(res.getMessage());
     }
 
 

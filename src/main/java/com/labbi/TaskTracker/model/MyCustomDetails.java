@@ -28,7 +28,6 @@ public class MyCustomDetails implements UserDetailsService {
         if(optionalUser.isPresent()){
 
             var userObject = optionalUser.get();
-            System.out.println(userObject.getPassword());
             return User.builder()
                     .username(userObject.getEmail())
                     .password(userObject.getPassword())

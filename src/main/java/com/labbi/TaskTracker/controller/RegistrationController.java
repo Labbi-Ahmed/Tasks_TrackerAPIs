@@ -49,7 +49,6 @@ public class RegistrationController {
                 new UsernamePasswordAuthenticationToken(dao.getEmail(),dao.getPassword())
         );
 
-
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
 

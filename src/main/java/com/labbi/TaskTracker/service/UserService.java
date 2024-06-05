@@ -1,6 +1,7 @@
 package com.labbi.TaskTracker.service;
 
 import com.labbi.TaskTracker.common.ObjectMapper;
+import com.labbi.TaskTracker.model.ChangePassRes;
 import com.labbi.TaskTracker.model.dao.UpdateUserDAO;
 import com.labbi.TaskTracker.model.dao.UpdateUserPasswordDAO;
 import com.labbi.TaskTracker.model.dao.UserDAO;
@@ -11,6 +12,7 @@ import com.labbi.TaskTracker.model.User;
 import com.labbi.TaskTracker.repogitory.RoleRepository;
 import com.labbi.TaskTracker.repogitory.UserRepogitory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,6 @@ public class UserService {
         dao.setPassword(passwordEncoder.encode(dao.getPassword()));
 
         User user = ObjectMapper.createUserMapper(dao);
-
 
 
         Role defaultRole = roleRepository.findByName("USER");
@@ -68,19 +69,19 @@ public class UserService {
         return userDTO;
     }
 
-    public String changePassword(UpdateUserPasswordDAO dao, String email) {
+    public ChangePassRes changePassword(UpdateUserPasswordDAO dao, String email) {
 
-        if(!dao.getNewPassword().equals(dao.getNewConfirmPassword())) return "Password not matched";
+        if(!dao.getNewPassword().equals(dao.getNewConfirmPassword()))return new ChangePassRes(HttpStatus.BAD_REQUEST,"Password not matched");
 
         User user = repogitory.findByEmail(email);
 
-        if(user == null) return "Invalid email or current password";
+        if(user == null) return new ChangePassRes(HttpStatus.BAD_REQUEST, "Invalid email or current password");
 
-        if(!passwordEncoder.matches(dao.getOldPassword(), user.getPassword())) return "Password Invalid";
+        if(!passwordEncoder.matches(dao.getOldPassword(), user.getPassword())) return new ChangePassRes(HttpStatus.BAD_REQUEST, "Please enter valid current password");
         user.setPassword(passwordEncoder.encode(dao.getNewConfirmPassword()));
 
         repogitory.save(user);
 
-        return "Successfully changed password";
+        return new ChangePassRes(HttpStatus.OK,"Successfully changed password");
     }
 }
