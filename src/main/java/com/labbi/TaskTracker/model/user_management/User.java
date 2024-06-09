@@ -59,7 +59,6 @@ public class User {
 
     private Instant createDate;
     private Instant updateDate;
-
     private boolean active;
     private String profileImage;
 }

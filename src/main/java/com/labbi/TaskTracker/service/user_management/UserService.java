@@ -2,13 +2,12 @@ package com.labbi.TaskTracker.service.user_management;
 
 import com.labbi.TaskTracker.common.ObjectMapper;
 import com.labbi.TaskTracker.model.user_management.ChangePassRes;
+import com.labbi.TaskTracker.model.user_management.Role;
+import com.labbi.TaskTracker.model.user_management.User;
 import com.labbi.TaskTracker.model.user_management.dao.UpdateUserDAO;
 import com.labbi.TaskTracker.model.user_management.dao.UpdateUserPasswordDAO;
 import com.labbi.TaskTracker.model.user_management.dao.UserDAO;
-import com.labbi.TaskTracker.model.user_management.dao.UserLoginDAO;
 import com.labbi.TaskTracker.model.user_management.dto.UserDTO;
-import com.labbi.TaskTracker.model.user_management.Role;
-import com.labbi.TaskTracker.model.user_management.User;
 import com.labbi.TaskTracker.repository.user_management.RoleRepository;
 import com.labbi.TaskTracker.repository.user_management.UserRepogitory;
 import lombok.RequiredArgsConstructor;
@@ -51,16 +50,10 @@ public class UserService {
 
     }
 
-    public User getLoginUser(UserLoginDAO dao) {
-
-        String password = passwordEncoder.encode(dao.getPassword());
-        return repogitory.findByEmailAndPassword(dao.getEmail(), password);
-    }
-
     public UserDTO userProfileEdit(UpdateUserDAO dao , String email) {
 
         User user = repogitory.findByEmail(email);
-        System.out.println(user);
+
         user = ObjectMapper.updateUserMapper(user,dao);
 
         user = repogitory.save(user);

@@ -20,23 +20,23 @@ public class ProjectWorker {
 
     @ManyToOne
     @MapsId("projectId")
-    @JoinColumn(name = "projectId")
-    private Project project_worker;
+    @JoinColumn(name = "project_id")
+    private Project projectWorker;
 
     @ManyToOne
     @MapsId("userId")
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "worker_id")
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "workerProjectRole",referencedColumnName = "id")
+    private ProjectRole role;
 
     private Instant createdAt;
     private Instant updatedAt;
 
     // Getters and setters
-
     public enum Role {
-        DEVELOPER, WORKER
+         WORKER,MANAGER
     }
 }

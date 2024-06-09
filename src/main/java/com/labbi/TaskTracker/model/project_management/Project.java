@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
+import java.time.Instant;
 import java.util.Set;
 
 @Entity
@@ -22,14 +22,13 @@ public class Project {
 
     private String projectName;
     private String description;
-//    private LocalDateTime createdAt;
+    private Instant createdAt;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JoinColumn(name = "ownerId")
     private User owner;
 
-    @OneToMany(mappedBy = "project_worker")
-    private Set<ProjectWorker> userProjects = new HashSet<>();
-
-    // Getters and setters
+    @OneToMany(mappedBy = "projectWorker")
+    private Set<ProjectWorker> userProjects;// = new HashSet<>();
 }
 
