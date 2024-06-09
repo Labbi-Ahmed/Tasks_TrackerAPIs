@@ -9,23 +9,23 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 @Entity
+@Table(name = "project_worker")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserProject {
+public class ProjectWorker {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userProjectId;
-
-
+    @EmbeddedId
+    private ProjectWorkerId projectWorkerId;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @MapsId("projectId")
+    @JoinColumn(name = "projectId")
+    private Project project_worker;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @MapsId("userId")
+    @JoinColumn(name = "userId")
     private User user;
 
     @Enumerated(EnumType.STRING)

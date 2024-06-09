@@ -2,7 +2,7 @@ package com.labbi.TaskTracker.service.project_management;
 
 import com.labbi.TaskTracker.model.project_management.Project;
 import com.labbi.TaskTracker.repository.project_management.ProjectRepository;
-import com.labbi.TaskTracker.repository.project_management.UserProjectRepository;
+import com.labbi.TaskTracker.repository.project_management.ProjectWorkerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class ProjectService {
 
     private final ProjectRepository projectRepogitory;
-    private final UserProjectRepository userProjectRepository;
+    private final ProjectWorkerRepository userProjectRepository;
 
 
     public List<Project> getAllProjectS(){
