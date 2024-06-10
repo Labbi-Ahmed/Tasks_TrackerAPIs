@@ -10,6 +10,7 @@ import com.labbi.TaskTracker.model.user_management.dao.UserDAO;
 import com.labbi.TaskTracker.model.user_management.dto.UserDTO;
 import com.labbi.TaskTracker.repository.user_management.RoleRepository;
 import com.labbi.TaskTracker.repository.user_management.UserRepogitory;
+import com.labbi.TaskTracker.utility.InternalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -65,6 +66,10 @@ public class UserService {
     public ChangePassRes changePassword(UpdateUserPasswordDAO dao, String email) {
 
         if(!dao.getNewPassword().equals(dao.getNewConfirmPassword()))return new ChangePassRes(HttpStatus.BAD_REQUEST,"Password not matched");
+        String userEmail = InternalService.getAuthenticatedUser();
+
+        if(!userEmail.equals(email))
+            return new ChangePassRes(HttpStatus.BAD_REQUEST,"provide valid email");
 
         User user = repogitory.findByEmail(email);
 

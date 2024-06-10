@@ -35,6 +35,8 @@ public class WebSecurityConfiguration {
                         auth
                                 .requestMatchers( "/","/api/v1/register","/api/v1/login")
                                 .permitAll()
+                                .requestMatchers("/swagger-resources/**", "/swagger-ui/index.html", "/api-docs", "/webjars/**","/v3/api-docs")
+                                .permitAll()
                                 .anyRequest()
                                 .authenticated()
 

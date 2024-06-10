@@ -24,7 +24,7 @@ public class Project {
     private String description;
     private Instant createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ownerId")
     private User owner;
 

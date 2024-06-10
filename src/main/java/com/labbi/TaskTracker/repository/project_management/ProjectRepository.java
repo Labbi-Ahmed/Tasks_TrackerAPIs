@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByOwner(User owner);
-    Project findByOwnerAndId(User owner, Long id);
+//    Project findByOwnerAndId(User owner, Long id);
 
 }

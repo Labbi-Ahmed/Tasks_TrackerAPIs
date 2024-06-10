@@ -62,11 +62,19 @@ public class ProjectService {
            responseDTO.setProject(null);
            return responseDTO;
        }
+        System.out.println("ok");
 
 //       User user = userRepogitory.findByEmail(email);
-       Optional<Project> project = projectRepogitory.findById(id); //findByOwnerAndId(user,id);
+        Optional<Project> project = null; //findByOwnerAndId(user,id);
+        try {
+            project = projectRepogitory.findById(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
 
-       if(!project.isPresent()){
+        }
+
+        if(!project.isPresent()){
            responseDTO.setStatus(HttpStatus.NOT_FOUND);
            responseDTO.setProject(null);
            return responseDTO;
